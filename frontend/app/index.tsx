@@ -1,15 +1,16 @@
 import { View, Text } from "react-native";
-import firebase from "firebase/app";
+import { initializeApp } from "firebase/app";
 import Constants from "expo-constants";
+import AuthScreen from "./screens/auth";
 
-if (firebase.getApps.length == 0) {
-  firebase.initializeApp(Constants.manifest.web.config.firebase);
-}
+// Initialize Firebase
+const app = initializeApp(Constants.manifest.web.config.firebase);
 
 const Home = () => {
   return (
-    <View>
-      <Text>Home</Text>
+    <View className="flex">
+      <Text className="font-bold">cf replay</Text>
+      <AuthScreen />
     </View>
   );
 };
