@@ -1,15 +1,33 @@
-import { View, Text } from "react-native";
-import { initializeApp } from "firebase/app";
-import Constants from "expo-constants";
-import AuthScreen from "./screens/auth";
-
-// Initialize Firebase
-const app = initializeApp(Constants.manifest.web.config.firebase);
+import { View } from "react-native";
+import AuthScreen from "./screens";
+import { auth, onAuthStateChanged } from "./firebase";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import { login, logout, selectUser } from "./redux/slices/user";
 
 const Home = () => {
+  const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        dispatch(
+          login({
+            email: userAuth.email,
+            uid: userAuth.uid,
+            displayName: userAuth.displayName,
+            photoUrl: userAuth.photoURL,
+          })
+        );
+      } else {
+        dispatch(logout());
+      }
+    });
+  }, []);
+
   return (
-    <View className="flex">
-      <Text className="font-bold">cf replay</Text>
+    <View>
       <AuthScreen />
     </View>
   );
