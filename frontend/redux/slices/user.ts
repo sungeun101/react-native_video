@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { db } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 type UserState = {
   user: any;
@@ -27,3 +29,18 @@ export const { login, logout } = slice.actions;
 export const selectUser = (state: UserState) => state.user.user;
 
 export default slice.reducer;
+
+// -------------------
+
+// export const getCurrentUserData = async () => {
+//   try {
+//     const docRef = await addDoc(collection(db, "users"), {
+//       first: "Ada",
+//       last: "Lovelace",
+//       born: 1815,
+//     });
+//     console.log("Document written with ID: ", docRef.id);
+//   } catch (e) {
+//     console.error("Error adding document: ", e);
+//   }
+// };

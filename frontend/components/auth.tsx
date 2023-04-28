@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { Feather } from "@expo/vector-icons";
 
-export default function AuthMenu() {
+export default function Auth() {
   return (
     <View className="h-full flex flex-col justify-between">
       <View className="p-3">
