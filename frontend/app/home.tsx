@@ -25,6 +25,13 @@ export default function home() {
       </TouchableOpacity>
 
       <Text>{auth?.currentUser?.email}</Text>
+
+      <TouchableOpacity
+        className="p-4 bg-gray-200 border-gray-300"
+        onPress={() => router.push("/record")}
+      >
+        <Text>Open Camera</Text>
+      </TouchableOpacity>
     </View>
   );
 }
